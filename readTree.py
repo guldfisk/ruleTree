@@ -19,8 +19,8 @@ def reads(s):
 	return root
 		
 if __name__=='__main__' and len(sys.argv)>1:
-	file = open(sys.argv[1], 'rb')
-	t = file.read().decode('UTF-8')
+	file = open(sys.argv[1], 'r')
+	t = file.read()
 	file.close()
 	root = reads(t)
 	if len(sys.argv)>2: path = sys.argv[2]
