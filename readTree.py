@@ -5,7 +5,7 @@ import re
 def reads(s):
 	root = Tree(seperator='')
 	current = [root]
-	for m in re.finditer('(\w*)(?<!\\\\)(<+|\||>+)(.+?)\s*(?<!\\\\)(?=\w*(?:<+|\||>+|.\Z))', t, re.DOTALL+re.UNICODE):
+	for m in re.finditer('(\w*)(?<!\\\\)(<+|\||>+)(.+?)\s*(?<!\\\\)(?=\w*(?:<+|\||>+|.\Z))', s, re.DOTALL+re.UNICODE):
 		label, action, content = m.groups()
 		move = len(action)
 		tree = Tree(content, label)
@@ -17,14 +17,13 @@ def reads(s):
 			current[-1].addBranch(tree)
 		else: current[-1].addBranch(tree)
 	return root
-		
-if __name__=='__main__' and len(sys.argv)>1:
-	file = open(sys.argv[1], 'r')
-	t = file.read()
-	file.close()
+
+def main():
+	if len(sys.argv)<1: return
+	with open(sys.argv[1], 'r') as f: t = f.read()
 	root = reads(t)
 	if len(sys.argv)>2: path = sys.argv[2]
 	else: path = re.match('(.+)(\..*?\Z)', sys.argv[1]).groups()[0]+'.txt'
-	file = open(path, 'wb')
-	file.write(root.dumps().encode('UTF-8'))
-	file.close()
+	with open(path, 'wb') as f: f.write(root.dumps().encode('UTF-8'))
+	
+if __name__=='__main__': main()

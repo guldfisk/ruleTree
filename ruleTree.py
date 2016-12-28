@@ -1,5 +1,3 @@
-import sys
-sys.path.append('c:\\Projeter\\farligfarligslange\\roman')
 import roman
 import re
 
@@ -69,17 +67,3 @@ class Tree:
 		return self.get(level, position, baseStyle).dumps()
 	def dump(self, file, level=0, position=0, baseStyle=0):
 		file.write(self.dumps(level, position, baseStyle))
-		
-if __name__=='__main__':
-	t1 = Tree('wauw')
-	for i in range(10): t1.addBranch(Tree('damn'))
-	f1 = Tree('gdamn', 'her')
-	g1 = Tree('boom\\ref:her')
-	h1 = Tree('', seperator='')
-
-	h1.addBranch(g1)
-	g1.addBranch(f1)
-	f1.addBranch(t1)
-
-	es = h1.get()
-	print(es.dumps())
