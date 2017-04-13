@@ -1,3 +1,4 @@
 __pycache__/
 readTree.bat
-example.txt
+.idea/
+examples/example.txt
